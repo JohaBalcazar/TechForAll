@@ -28,7 +28,7 @@ $user_id = $_SESSION['user_id'] ?? ($_SESSION['vendedor_id'] ?? ($_SESSION['admi
             <a href="/projectdone/admin/dashboard.php">Admin</a>
          <?php else: ?>
             <a href="/projectdone/home.php">Inicio</a>
-            <a href="/projectdone/about.php">Acerca de</a>
+            <a href="/projectdone/about.php">Sobre Nosotros</a>
             <a href="/projectdone/orders.php">Pedidos</a>
             <a href="/projectdone/shop.php">Compra ahora</a>
             <a href="/projectdone/vender.php">Vender</a>

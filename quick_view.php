@@ -21,12 +21,12 @@ include 'components/wishlist_cart.php';
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Vista rápida</title>
-   
-   <!-- font awesome cdn link  -->
+
+   <!-- Font Awesome -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/quick_view.css">
 
 </head>
 <body>
@@ -63,13 +63,13 @@ include 'components/wishlist_cart.php';
          <div class="content">
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
-               <div class="price"><span>GS.</span><?= $fetch_product['price']; ?><span>/-</span></div>
+               <div class="price"><span>GS.</span><?= $fetch_product['price']; ?><span></span></div>
                <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
             </div>
             <div class="details"><?= $fetch_product['details']; ?></div>
             <div class="flex-btn">
-               <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-               <input class="option-btn" type="submit" name="add_to_wishlist" value="add to wishlist">
+               <input type="submit" value="Agregar al carrito" class="btn" name="add_to_cart">
+               <input class="option-btn" type="submit" name="add_to_wishlist" value="Agregar a favoritos">
             </div>
          </div>
       </div>
@@ -77,7 +77,7 @@ include 'components/wishlist_cart.php';
    <?php
       }
    }else{
-      echo '<p class="empty">no products added yet!</p>';
+      echo '<p class="empty">¡Aún no se han añadido productos!</p>';
    }
    ?>
 

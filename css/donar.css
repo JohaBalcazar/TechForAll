@@ -1,222 +1,192 @@
+/* ==== DONAR.CSS ESTILO MODERNO PARA TECHFORALL ==== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+  --main-color: #a26bff;
+  --accent-color: #4a3aff;
+  --black: #0b0b13;
+  --dark-blue: #1a1a2e;
+  --light-color: #cccccc;
+  --text-color: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  --border-radius: 1rem;
+}
+
 body {
-    font-family: 'Segoe UI', sans-serif;
-    line-height: 1.6;
-    background: #fdfdfd;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  background: linear-gradient(135deg, var(--black), var(--dark-blue));
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
 }
 
 .about, .form-section, .historias {
-    padding: 3rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .about .row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
 }
 
 .about .image img {
-    max-width: 600px;
-    border-radius: 1.2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  border-radius: 1.2rem;
+  box-shadow: var(--box-shadow);
 }
 
 .about .content h3 {
-    font-size: 2.6rem;
-    color: #333;
+  font-size: 2.6rem;
+  color: var(--main-color);
 }
 
 .about .content p, .about .content ul {
-    font-size: 1.6rem;
-    color: #555;
+  font-size: 1.6rem;
+  color: var(--light-color);
 }
 
 .about .content ul {
-    list-style: none;
-    padding-left: 0;
+  list-style: none;
+  padding-left: 0;
 }
 
 .about .content ul li {
-    margin: 0.5rem 0;
+  margin: 0.5rem 0;
 }
 
 .boton {
-    padding: 1rem 2rem;
-    background: linear-gradient(45deg, rgb(0, 221, 255), rgb(55, 174, 178));
-    color: white;
-    font-size: 1.6rem;
-    border: none;
-    border-radius: 0.7rem;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background 0.3s ease;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, var(--main-color), var(--accent-color));
+  color: white;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
 }
 
 .boton:hover {
-    background: linear-gradient(45deg, rgb(0, 213, 255), rgb(67, 200, 209));
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  background: var(--accent-color);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .boton.secundario {
-    background: #666;
+  background-color: transparent;
+  color: white;
+  border: 2px solid var(--main-color);
+  margin-left: 1rem;
+}
+
+.boton.secundario:hover {
+  background-color: var(--main-color);
+  color: white;
 }
 
 .form-section {
-    background-color: #fff7ec;
-    border-radius: 1rem;
-    padding: 3rem;
-    margin-top: 3rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+  margin-top: 3rem;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--card-border);
 }
 
 .form-section h2 {
-    font-size: 2.2rem;
-    color: #222;
-    text-align: center;
-    margin-bottom: 2rem;
+  font-size: 2.4rem;
+  color: var(--main-color);
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .formulario {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .formulario input, .formulario select, .formulario textarea {
-    padding: 1rem;
-    font-size: 1.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  background-color: rgba(255,255,255,0.05);
+  color: rgb(255, 255, 255);
+}
+
+.formulario input::placeholder, .formulario textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .formulario input:focus, .formulario select:focus, .formulario textarea:focus {
-    outline: none;
-    border-color: rgb(0, 229, 255);
-    box-shadow: 0 0 5px rgba(0, 217, 255, 0.4);
+  outline: none;
+  border-color: var(--main-color);
+  box-shadow: 0 0 5px rgba(162, 107, 255, 0.4);
 }
 
 .oculto {
-    display: none;
+  display: none;
 }
 
-/* Historias reales */
 .historias {
-    margin-top: 4rem;
-    text-align: center;
+  margin-top: 4rem;
+  text-align: center;
 }
 
 .historias h2 {
-    font-size: 2.4rem;
-    color: #333;
-    margin-bottom: 2rem;
+  font-size: 2.4rem;
+  color: var(--main-color);
+  margin-bottom: 2rem;
 }
 
 .historias .grid {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .historias .card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    max-width: 320px;
-    padding: 1.5rem;
-    text-align: center;
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  max-width: 320px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--card-border);
 }
 
 .historias .card img {
-    width: 100%;
-    border-radius: 0.8rem;
-    margin-bottom: 1rem;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  border-radius: 0.8rem;
+  margin-bottom: 1rem;
+  height: 200px;
+  object-fit: cover;
 }
 
 .historias .card p {
-    font-size: 1.4rem;
-    color: #555;
+  font-size: 1.4rem;
+  color: var(--light-color);
 }
+
 .fade-in {
-    animation: fadeIn 1.2s ease-in both;
- }
- 
- @keyframes fadeIn {
-    from {
-       opacity: 0;
-       transform: translateY(20px);
-    }
-    to {
-       opacity: 1;
-       transform: translateY(0);
-    }
- }
- 
- .oculto {
-    display: none;
- }
- 
- .boton.secundario {
-    background-color: transparent;
-    color: rgb(0, 187, 255);
-    border: 2px solid rgb(87, 222, 246);
-    margin-left: 1rem;
- }
- 
- .boton.secundario:hover {
-    background-color: rgb(0, 225, 255);
-    color: white;
- }
- 
- /* Galería de donaciones */
- .donaciones-realizadas {
-    padding: 4rem 2rem;
-    background-color: #fffdf8;
-    text-align: center;
- }
- 
- .donaciones-realizadas h2 {
-    font-size: 2.8rem;
-    margin-bottom: 3rem;
-    color: #333;
- }
- 
- .galeria {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
- }
- 
- .galeria .item {
-    background-color: white;
-    border-radius: 1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    max-width: 300px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
- }
- 
- .galeria .item:hover {
-    transform: translateY(-5px);
- }
- 
- .galeria img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-bottom: 1px solid #ddd;
- }
- 
- .galeria p {
-    font-size: 1.5rem;
-    padding: 1rem;
-    color: #555;
- }
- 
+  animation: fadeIn 1.2s ease-in both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

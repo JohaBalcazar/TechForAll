@@ -30,18 +30,18 @@ if(isset($_POST['submit'])){
    $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
 
    if($old_pass == $empty_pass){
-      $message[] = 'please enter old password!';
+      $message[] = '¡Por favor ingrese su contraseña antigua!';
    }elseif($old_pass != $prev_pass){
-      $message[] = 'old password not matched!';
+      $message[] = '¡La contraseña anterior no coincide!';
    }elseif($new_pass != $cpass){
-      $message[] = 'confirm password not matched!';
+      $message[] = '¡Confirmar contraseña no coincidente!';
    }else{
       if($new_pass != $empty_pass){
          $update_admin_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
          $update_admin_pass->execute([$cpass, $user_id]);
-         $message[] = 'password updated successfully!';
+         $message[] = '¡Contraseña actualizada exitosamente!';
       }else{
-         $message[] = 'please enter a new password!';
+         $message[] = '¡Por favor ingrese una nueva contraseña!';
       }
    }
    
@@ -73,12 +73,12 @@ if(isset($_POST['submit'])){
    <form action="" method="post">
       <h3>Actualizar ahora </h3>
       <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
-      <input type="text" name="name" required placeholder="enter your username" maxlength="20"  class="box" value="<?= $fetch_profile["name"]; ?>">
-      <input type="email" name="email" required placeholder="enter your email" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
-      <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="update now" class="btn" name="submit">
+      <input type="text" name="name" required placeholder="Ingresa tu nombre de usuario" maxlength="20"  class="box" value="<?= $fetch_profile["name"]; ?>">
+      <input type="email" name="email" required placeholder="Ingresa tu correo electrónico" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
+      <input type="password" name="old_pass" placeholder="" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="new_pass" placeholder="Ingresa tu contraseña" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="cpass" placeholder="Confirma tu nueva contraseña" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="submit" value="Actualizar ahora" class="btn" name="submit">
    </form>
 
 </section>

@@ -38,22 +38,24 @@ $total_pedidos = $select_pedidos->fetchColumn();
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Panel del Vendedor</title>
+   <title>Panel de Vendedor</title>
    <link rel="stylesheet" href="../css/admin_style.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/vendedor_style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
 <?php include 'vendedor_header.php'; ?>
 
 <section class="dashboard">
-   <h1 class="heading">Panel del Vendedor</h1>
+   <h1 class="heading">Dashboard Vendedor</h1>
 
    <div class="box-container">
       <div class="box">
-         <h3>Bienvenido</h3>
+         <h3>Bienvenido/a</h3>
          <p><?= htmlspecialchars($fetch_profile['name']); ?></p>
-         <a href="actualizar_perfil.php" class="btn">Actualizar Perfil</a>
+         <a href="perfil_vendedor.php" class="btn">Actualizar Perfil</a>
       </div>
 
       <div class="box">
@@ -71,7 +73,8 @@ $total_pedidos = $select_pedidos->fetchColumn();
       <div class="box">
          <h3>Gs. <?= $total_mes; ?></h3>
          <p>Ventas este mes</p>
-         <a href="estadisticas.php" class="btn">Ver estadísticas</a>
+         <a href="ventas.php" class="btn">Ver ventas</a>
+
       </div>
 
       <div class="box">

@@ -38,15 +38,15 @@ if(isset($_SESSION['user_id'])){
    <div class="row">
 
       <div class="image">
-         <img src="images/23.png" alt="">
+         <img src="images/nos.png" alt="">
       </div>
 
       <div class="content">
          <h3>"TechForAll: Tecnología reacondicionada con propósito"</h3>
          <p>Conectamos personas, reducimos el desperdicio electrónico y promovemos el acceso a dispositivos de calidad a precios justos. Comprá, vendé o doná con impacto social.</p>
 
-         <p>¿Qué es TechForAll? <a href="https://www.facebook.com/UniNorteLuque/?locale=es_LA" target="_blank">TechForAll es una plataforma paraguaya de e-commerce dedicada a la compra, venta, reacondicionamiento y donación de productos tecnológicos. </a> Promovemos el acceso equitativo a la tecnología y fomentamos la economía circular mediante procesos responsables y sustentables. </p>
-         <a href="contact.php" class="btn">Contacta con nosotros</a>
+         <p>¿Qué es TechForAll? </p> <p>TechForAll es una plataforma paraguaya de e-commerce dedicada a la compra, venta, reacondicionamiento y donación de productos tecnológicos. </a> Promovemos el acceso equitativo a la tecnología y fomentamos la economía circular mediante procesos responsables y sustentables.</p>
+         <a href="contact.php" class="btn">Contactar con nosotros</a>
       </div>
 
    </div>

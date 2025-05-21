@@ -70,24 +70,24 @@ if(isset($_GET['delete_all'])){
       <img src="uploaded_img/<?= $fetch_wishlist['image']; ?>" alt="">
       <div class="name"><?= $fetch_wishlist['name']; ?></div>
       <div class="flex">
-         <div class="price">GS.<?= $fetch_wishlist['price']; ?>/-</div>
+         <div class="price">GS.<?= $fetch_wishlist['price']; ?></div>
          <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
       </div>
-      <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-      <input type="submit" value="delete item" onclick="return confirm('delete this from wishlist?');" class="delete-btn" name="delete">
+      <input type="submit" value="añadir al carrito" class="btn" name="add_to_cart">
+      <input type="submit" value="eliminar elemento" onclick="return confirm('¿Borrar esto de la lista de deseos?');" class="delete-btn" name="delete">
    </form>
    <?php
       }
    }else{
-      echo '<p class="empty">your wishlist is empty</p>';
+      echo '<p class="empty">Tu lista de deseos está vacía</p>';
    }
    ?>
    </div>
 
    <div class="wishlist-total">
-      <p>Total : <span>GS.<?= $grand_total; ?>/-</span></p>
+      <p>Total : <span>GS.<?= $grand_total; ?></span></p>
       <a href="shop.php" class="option-btn">Continuar comprando.</a>
-      <a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>" onclick="return confirm('delete all from wishlist?');">delete all item</a>
+      <a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>" onclick="return confirm('¿Borrar todo de la lista de deseos?');">eliminar todo el elemento</a>
    </div>
 
 </section>

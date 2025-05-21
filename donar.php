@@ -1,10 +1,15 @@
-<?php
+<?php 
 include 'components/connect.php';
 session_start();
 $user_id = $_SESSION['user_id'] ?? null;
-include 'components/user_header.php'
+include 'components/user_header.php';
 
+$mensaje_exito = '';
+if (isset($_GET['exito']) && $_GET['exito'] == 1) {
+   $mensaje_exito = '¡Gracias por tu donación! Verificaremos la información y nos pondremos en contacto contigo pronto.';
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -20,13 +25,21 @@ include 'components/user_header.php'
    <!-- Estilos -->
    <link rel="stylesheet" href="css/style.css">
    <link rel="stylesheet" href="css/donar.css">
+   <style>
+      .oculto { display: none; }
+      .form-section { animation: fadeIn 0.6s ease; }
+      @keyframes fadeIn {
+         from { opacity: 0; transform: translateY(20px); }
+         to { opacity: 1; transform: translateY(0); }
+      }
+   </style>
 </head>
 <body>
 
 <section class="about">
    <div class="row">
       <div class="image">
-         <img src="images/donars.png" alt="Donar Tecnología">
+         <img src="images/don.png" alt="Donar Tecnología">
       </div>
       <div class="content">
          <h3>Un pequeño gesto, un gran impacto</h3>
@@ -41,10 +54,15 @@ include 'components/user_header.php'
       </div>
    </div>
 </section>
+<?php if (!empty($mensaje_exito)): ?>
+   <div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin: 20px auto; width: 90%; max-width: 700px; text-align: center; border: 1px solid #c3e6cb;">
+      <?= $mensaje_exito ?>
+   </div>
+<?php endif; ?>
 
 <section id="form-donacion" class="form-section">
    <h2>Formulario de Donación</h2>
-   <form class="formulario" action="procesar_donacion.php" method="post">
+   <form class="formulario" action="procesar_donacion.php" method="post" enctype="multipart/form-data">
       <label for="nombre">Nombre y Apellido:</label>
       <input type="text" id="nombre" name="nombre" required>
 
@@ -52,20 +70,25 @@ include 'components/user_header.php'
       <input type="email" id="email" name="email" required>
 
       <label for="tipo">¿Qué deseas donar?</label>
-      <select id="tipo" name="tipo">
-         <option>Notebook</option>
-         <option>PC</option>
-         <option>Tablet</option>
-         <option>Impresora</option>
-         <option>Otro</option>
+      <select id="tipo" name="tipo" required>
+         <option value="">Selecciona un tipo</option>
+         <option value="Notebook">Notebook</option>
+         <option value="PC">PC</option>
+         <option value="Tablet">Tablet</option>
+         <option value="Impresora">Impresora</option>
+         <option value="Otro">Otro</option>
       </select>
 
       <label for="mensaje">Mensaje adicional:</label>
       <textarea id="mensaje" name="mensaje" rows="4"></textarea>
 
+      <label for="imagen">Foto del producto (obligatorio):</label>
+      <input type="file" name="imagen" id="imagen" accept="image/*" required>
+
       <button type="submit" class="boton">Enviar Donación</button>
    </form>
 </section>
+
 <section id="form-postulacion" class="form-section oculto">
    <h2>Postula tu Comunidad</h2>
    <form class="formulario" action="procesar_postulacion.php" method="post">
@@ -91,13 +114,12 @@ include 'components/user_header.php'
    </form>
 </section>
 
-
 <section class="historias">
    <h2>Historias que Inspiran</h2>
    <div class="grid">
       <div class="card">
          <img src="images/escuela.png" alt="Escuela rural conectada">
-         <p><strong>Escuela República del Paraguay</strong><br>Recibieron 10 notebooks que hoy utilizan en clases de informática.</p>
+         <p><strong>Escuela República del Paraguay</strong><br>Recibieron 10 laptops que hoy utilizan en clases de informática.</p>
       </div>
       <div class="card">
          <img src="images/comunidad.png" alt="Comedor con tecnología">

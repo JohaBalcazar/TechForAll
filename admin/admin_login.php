@@ -37,6 +37,8 @@ if(isset($_POST['submit'])){
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <link rel="stylesheet" href="../css/admin_style.css">
+   <link rel="stylesheet" href="../css/style.css">
+   
 
 </head>
 <body>
@@ -58,7 +60,6 @@ if(isset($_POST['submit'])){
 
    <form action="" method="post">
       <h3>Inicia sesión ahora</h3>
-      <p> Nombre de usuario predeterminado = <span>admin</span> & password = <span>111</span></p>
       <input type="text" name="name" required placeholder="Ingrese su nombre de usuario" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="pass" required placeholder="Introduce tu contraseña" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="Ingresar" class="btn" name="submit">

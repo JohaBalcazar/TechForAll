@@ -1,6 +1,8 @@
 <?php
-include 'components/connect.php';
 session_start();
+include 'components/connect.php';
+
+$message = [];
 
 if (isset($_POST['submit'])) {
    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
@@ -8,7 +10,7 @@ if (isset($_POST['submit'])) {
    $pass = $_POST['pass'];
    $cpass = $_POST['cpass'];
 
-   $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
+   $select_user = $conn->prepare("SELECT * FROM users WHERE email = ?");
    $select_user->execute([$email]);
 
    if ($select_user->rowCount() > 0) {
@@ -19,19 +21,18 @@ if (isset($_POST['submit'])) {
       $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
       $rol = 'vendedor';
 
-      $insert_user = $conn->prepare("INSERT INTO `users` (name, email, password, role) VALUES (?, ?, ?, ?)");
+      $insert_user = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
       $insert_user->execute([$name, $email, $hashed_pass, $rol]);
 
       $user_id = $conn->lastInsertId();
-      $stmt_vendedor = $conn->prepare("INSERT INTO `vendedores` (user_id) VALUES (?)");
+      $stmt_vendedor = $conn->prepare("INSERT INTO vendedores (user_id) VALUES (?)");
       $stmt_vendedor->execute([$user_id]);
 
       $_SESSION['vendedor_id'] = $user_id;
       $_SESSION['rol'] = 'vendedor';
       $_SESSION['nombre'] = $name;
 
-      // Redirige al home para mostrar vista pública con acceso al menú vendedor
-      header("Location: home.php");
+      header("Location: vendedor/home.php");
       exit;
    }
 }
@@ -43,47 +44,197 @@ if (isset($_POST['submit'])) {
    <meta charset="UTF-8">
    <title>Vender en TechForAll</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="css/style.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="css/style.css">
    <style>
-      .info-section { padding: 2rem; background: #f9f9f9; text-align: center; }
-      .info-section h2 { margin-bottom: 1rem; font-size: 2rem; }
-      .benefits { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
-      .benefit-box { max-width: 300px; background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-      .register-btn { margin: 2rem auto; display: block; padding: 1rem 2rem; background: #0d6efd; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; }
-      .register-form-container { display: none; padding: 2rem; background: #fff; border-top: 2px solid #0d6efd; text-align: center; }
-      .register-form-container.active { display: block; }
-      .form-container form { max-width: 400px; margin: auto; }
-      .box { width: 100%; padding: 10px; margin: 10px 0; }
-      .btn { padding: 10px 20px; background-color: #0d6efd; color: white; border: none; border-radius: 5px; cursor: pointer; }
+      :root {
+         --main-color: #a26bff;
+         --accent-color: #4a3aff;
+         --bg-color: #0b0b13;
+         --dark-blue: #1a1a2e;
+         --text-color: #fff;
+         --light-color: #ccc;
+         --box-bg: rgba(255,255,255,0.05);
+         --box-border: rgba(255,255,255,0.1);
+         --radius: 1rem;
+      }
+
+      body {
+         background: linear-gradient(135deg, var(--bg-color), var(--dark-blue));
+         color: var(--text-color);
+         font-family: 'Poppins', sans-serif;
+         margin: 0;
+         padding: 0;
+      }
+
+      .info-section {
+         padding: 4rem 2rem;
+         text-align: center;
+         max-width: 1200px;
+         margin: auto;
+      }
+
+      .info-section h2 {
+         font-size: 3.5rem;
+         margin-bottom: 2rem;
+         color: var(--main-color);
+      }
+
+      .info-section p {
+         font-size: 1.6rem;
+         max-width: 800px;
+         margin: 0 auto 3rem;
+         color: var(--light-color);
+         line-height: 1.8;
+      }
+
+      .benefits {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 2rem;
+         margin-bottom: 3rem;
+      }
+
+      .benefit-box {
+         background: var(--box-bg);
+         border: 1px solid var(--box-border);
+         padding: 2rem;
+         border-radius: var(--radius);
+         max-width: 300px;
+         text-align: left;
+         color: var(--text-color);
+      }
+
+      .benefit-box h3 {
+         color: var(--accent-color);
+         font-size: 2rem;
+         margin-bottom: 1rem;
+      }
+
+      .benefit-box p {
+         font-size: 1.4rem;
+         line-height: 1.6;
+      }
+
+      .register-btn {
+         background: linear-gradient(to right, var(--main-color), var(--accent-color));
+         padding: 1.5rem 3rem;
+         color: white;
+         font-size: 1.6rem;
+         border-radius: 0.8rem;
+         border: none;
+         cursor: pointer;
+         transition: 0.3s;
+      }
+
+      .register-btn:hover {
+         background: var(--accent-color);
+      }
+
+      .register-form-container {
+         display: none;
+         max-width: 500px;
+         margin: 3rem auto;
+         padding: 3rem;
+         background: var(--box-bg);
+         border: 1px solid var(--box-border);
+         border-radius: var(--radius);
+      }
+
+      .register-form-container.active {
+         display: block;
+      }
+
+      .register-form-container h3 {
+         font-size: 2.4rem;
+         color: var(--main-color);
+         margin-bottom: 2rem;
+      }
+
+      .register-form-container .box {
+         width: 100%;
+         padding: 1.2rem;
+         margin-bottom: 1.5rem;
+         border: none;
+         border-radius: 0.5rem;
+         font-size: 1.5rem;
+         background: rgba(255,255,255,0.1);
+         color: white;
+      }
+
+      .register-form-container .btn {
+         background: var(--main-color);
+         color: white;
+         border: none;
+         padding: 1rem 2rem;
+         border-radius: .5rem;
+         font-size: 1.6rem;
+         cursor: pointer;
+         transition: 0.3s;
+      }
+
+      .register-form-container .btn:hover {
+         background: var(--accent-color);
+      }
+
+      .info-image {
+         text-align: center;
+         margin: 3rem 0;
+      }
+
+      .info-image img {
+         width: 100%;
+         max-width: 500px;
+         border-radius: var(--radius);
+         box-shadow: 0 0 30px rgba(162, 107, 255, 0.2);
+      }
+
+      .message {
+         background: rgba(255, 0, 0, 0.1);
+         border: 1px solid #ff6b6b;
+         padding: 1rem;
+         color: #ff6b6b;
+         text-align: center;
+         margin: 2rem auto;
+         max-width: 500px;
+         border-radius: .5rem;
+      }
    </style>
 </head>
 <body>
 
 <?php include 'components/user_header.php'; ?>
 
-<?php if (isset($message)) {
-   foreach ($message as $msg) {
-      echo "<div class='message'><span>$msg</span></div>";
-   }
-} ?>
+<?php if (!empty($message)): ?>
+   <?php foreach ($message as $msg): ?>
+      <div class="message"><span><?= $msg ?></span></div>
+   <?php endforeach; ?>
+<?php endif; ?>
 
 <section class="info-section">
    <h2>¿Por qué vender en TechForAll?</h2>
+   <p>TechForAll es la plataforma ideal para quienes quieren darle una nueva vida a sus dispositivos tecnológicos. Vendé productos reacondicionados de manera rápida, segura y con impacto social positivo.</p>
+
    <div class="benefits">
       <div class="benefit-box">
-         <h3>Alcance amplio</h3>
-         <p>Llega a miles de compradores interesados en productos electrónicos reacondicionados.</p>
+         <h3>Alcance nacional</h3>
+         <p>Conectamos vendedores con cientos de compradores en todo el país.</p>
       </div>
       <div class="benefit-box">
-         <h3>Apoyo técnico</h3>
-         <p>Acceso a técnicos certificados para reacondicionar tus productos.</p>
+         <h3>Soporte técnico</h3>
+         <p>Reacondicioná tus dispositivos con el apoyo de técnicos certificados.</p>
       </div>
       <div class="benefit-box">
-         <h3>Plataforma segura</h3>
-         <p>Pagos protegidos y comisiones claras para tu tranquilidad.</p>
+         <h3>Pagos seguros</h3>
+         <p>Transacciones protegidas con plataformas de pago integradas y transparentes.</p>
       </div>
    </div>
+
+   <div class="info-image">
+      <img src="images/vender.png" alt="TechForAll Vender">
+   </div>
+
    <button class="register-btn" onclick="document.querySelector('.register-form-container').classList.toggle('active')">
       Registrarse como vendedor
    </button>

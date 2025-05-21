@@ -262,3 +262,37 @@ ADD CONSTRAINT fk_vendedor FOREIGN KEY (vendedor_id) REFERENCES users(id) ON DEL
 
 ALTER TABLE products
 ADD vendedor_id INT NOT NULL DEFAULT 1;
+
+CREATE TABLE `order_items` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `order_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  `quantity` INT NOT NULL,
+  `price` INT NOT NULL,
+  FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE
+);
+
+CREATE TABLE postulaciones (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  numero VARCHAR(20),
+  producto VARCHAR(100),
+  motivo TEXT,
+  mensaje TEXT,
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  estado ENUM('pendiente', 'aceptado', 'rechazado') DEFAULT 'pendiente'
+);
+
+
+CREATE TABLE donaciones (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  tipo VARCHAR(50) NOT NULL,
+  mensaje TEXT,
+  imagen VARCHAR(255),
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  estado ENUM('pendiente', 'aceptado', 'rechazado') DEFAULT 'pendiente'
+);

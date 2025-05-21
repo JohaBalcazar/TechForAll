@@ -1,0 +1,170 @@
+.quick-view {
+  padding: 4rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+  background: transparent;
+  color: white;
+}
+
+.quick-view .heading {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  color: #a26bff;
+}
+
+.quick-view form.box {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease;
+}
+
+.quick-view form.box:hover {
+  transform: translateY(-4px);
+}
+
+.quick-view form .row {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media(min-width: 768px) {
+  .quick-view form .row {
+    flex-direction: row;
+  }
+}
+
+.quick-view .image-container {
+  flex: 1 1 100%;
+  text-align: center;
+}
+
+.quick-view .main-image img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(162, 107, 255, 0.15);
+}
+
+.quick-view .sub-image {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.quick-view .sub-image img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.quick-view .sub-image img:hover {
+  border-color: #a26bff;
+}
+
+.quick-view .content {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+}
+
+.quick-view .content .name {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #e3d3ff; /* lila claro */
+}
+
+.quick-view .content .price {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #edc241 !important; /* verde fluorescente */
+  margin-bottom: 1rem;
+}
+
+.quick-view .content .qty {
+  width: 80px;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #a26bff;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+
+.quick-view .content .details {
+  margin-top: 1.5rem;
+  font-size: 1.6rem;
+  color: #dddddd;
+  line-height: 1.6;
+}
+
+.quick-view .flex-btn {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.quick-view .btn,
+.quick-view .option-btn {
+  flex: 1;
+  padding: 1.2rem 0;
+  border-radius: 0.7rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.quick-view .btn {
+  background: linear-gradient(135deg, #a26bff, #6c63ff);
+  color: white;
+}
+
+.quick-view .btn:hover {
+  background: #5b4ec9;
+}
+
+.quick-view .option-btn {
+  background: transparent;
+  border: 2px solid #a26bff;
+  color: #a26bff;
+}
+
+.quick-view .option-btn:hover {
+  background: #a26bff;
+  color: white;
+}
+
+.empty {
+  text-align: center;
+  font-size: 2rem;
+  color: #ccc;
+  padding: 4rem;
+}
+.quick-view .content .name {
+  color: #e3d3ff !important;
+}
+.quick-view .name {
+  color: #e3d3ff !important;
+}
+.quick-view .qty {
+  color: white !important;
+  background-color: rgba(255,255,255,0.1);
+}

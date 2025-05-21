@@ -6,6 +6,7 @@ $admin_id = $_SESSION['admin_id'];
 
 if (!isset($admin_id)) {
    header('location:admin_login.php');
+   exit;
 }
 
 $select_profile = $conn->prepare("SELECT * FROM `admins` WHERE id = ?");
@@ -17,44 +18,110 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 <html lang="es">
 <head>
    <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Dashboard</title>
+   <title>Dashboard Admin - TechForAll</title>
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
    <link rel="stylesheet" href="../css/admin_style.css">
+   <link rel="stylesheet" href="../css/style.css">
 
    <style>
-      .donaciones {
-         padding: 2rem;
-         background: #f1f1f1;
+      body {
+         background: #0b0b13;
+         font-family: 'Poppins', sans-serif;
+         color: white;
       }
 
-      .donaciones h1 {
+      .dashboard {
+         padding: 3rem 2rem;
+         max-width: 1200px;
+         margin: auto;
+      }
+
+      .heading {
          text-align: center;
-         margin-bottom: 2rem;
-         color: #333;
+         font-size: 2.5rem;
+         color: #a26bff;
+         margin-bottom: 3rem;
       }
 
-      .donacion {
-         background: #fff;
-         border-left: 5px solid #4CAF50;
-         padding: 15px;
-         margin: 15px auto;
-         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-         width: 80%;
-         border-radius: 8px;
+      .box-container {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+         gap: 2rem;
       }
 
-      .donacion h3 {
+      .box {
+         background: rgba(255, 255, 255, 0.05);
+         padding: 2rem;
+         border-radius: 1rem;
+         border: 1px solid rgba(255, 255, 255, 0.1);
+         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+         transition: transform 0.3s ease;
+         text-align: center;
+      }
+
+      .box:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 8px 30px rgba(162, 107, 255, 0.2);
+      }
+
+      .box h3 {
+         font-size: 2rem;
+         color: #ffb347;
+         margin-bottom: 0.5rem;
+      }
+
+      .box p {
+         color: #ccc;
+         font-size: 1.3rem;
+         margin-bottom: 1rem;
+      }
+
+      .btn {
+         background: #a26bff;
+         color: white;
+         padding: 0.7rem 1.5rem;
+         border-radius: 5px;
+         text-decoration: none;
+         font-weight: bold;
+         display: inline-block;
+         transition: background 0.3s ease;
+      }
+
+      .btn:hover {
+         background: #6c63ff;
+      }
+
+      .section-titulo {
+         text-align: center;
+         font-size: 2rem;
+         margin: 4rem 0 2rem;
+         color: #ffb347;
+      }
+
+      .registro-card {
+         background: rgba(255, 255, 255, 0.05);
+         border: 1px solid rgba(255, 255, 255, 0.1);
+         margin: 1rem auto;
+         padding: 1.5rem;
+         border-radius: 1rem;
+         max-width: 800px;
+         box-shadow: 0 0 15px rgba(0,0,0,0.3);
+         color: white;
+      }
+
+      .registro-card h3 {
          margin: 0;
          color: #4CAF50;
+         font-size: 1.5rem;
       }
 
-      .donacion p {
-         margin: 5px 0;
-         color: #555;
+      .registro-card p {
+         color: #ccc;
+         margin: 0.5rem 0;
       }
+
    </style>
 </head>
 <body>
@@ -62,12 +129,12 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 <?php include '../components/admin_header.php'; ?>
 
 <section class="dashboard">
-   <h1 class="heading">Dashboard</h1>
+   <h1 class="heading">📊 Panel de Control</h1>
 
    <div class="box-container">
       <div class="box">
-         <h3>Bienvenido!</h3>
-         <p><?= $fetch_profile['name']; ?></p>
+         <h3>Bienvenido</h3>
+         <p><?= htmlspecialchars($fetch_profile['name']); ?></p>
          <a href="update_profile.php" class="btn">Actualizar Perfil</a>
       </div>
 
@@ -80,23 +147,31 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
             $total_pendings += $fetch_pendings['total_price'];
          }
          ?>
-         <h3><span>GS.</span><?= $total_pendings; ?><span>/-</span></h3>
-         <p>Pendientes totales</p>
+         <h3>Gs. <?= number_format($total_pendings, 0, ',', '.') ?></h3>
+         <p>Pagos pendientes</p>
          <a href="placed_orders.php" class="btn">Ver Pedidos</a>
       </div>
 
       <div class="box">
          <?php
-         $total_completes = 0;
-         $select_completes = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
-         $select_completes->execute(['completed']);
-         while ($fetch_completes = $select_completes->fetch(PDO::FETCH_ASSOC)) {
-            $total_completes += $fetch_completes['total_price'];
-         }
+         $select_post = $conn->prepare("SELECT COUNT(*) FROM `postulaciones`");
+         $select_post->execute();
+         $total_postulaciones = $select_post->fetchColumn();
          ?>
-         <h3><span>GS.</span><?= $total_completes; ?><span>/-</span></h3>
-         <p>Pedidos completados</p>
-         <a href="placed_orders.php" class="btn">Ver pedidos</a>
+         <h3><?= $total_postulaciones ?></h3>
+         <p>Postulaciones recibidas</p>
+         <a href="postulaciones.php" class="btn">Ver postulaciones</a>
+      </div>
+
+      <div class="box">
+         <?php
+         $select_donaciones = $conn->prepare("SELECT COUNT(*) FROM `donaciones`");
+         $select_donaciones->execute();
+         $total_donaciones = $select_donaciones->fetchColumn();
+         ?>
+         <h3><?= $total_donaciones ?></h3>
+         <p>Donaciones</p>
+         <a href="donaciones.php" class="btn">Ver donaciones</a>
       </div>
 
       <div class="box">
@@ -117,7 +192,7 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
          $number_of_products = $select_products->rowCount();
          ?>
          <h3><?= $number_of_products; ?></h3>
-         <p>Productos agregados</p>
+         <p>Productos publicados</p>
          <a href="products.php" class="btn">Ver productos</a>
       </div>
 
@@ -128,19 +203,8 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
          $number_of_users = $select_users->rowCount();
          ?>
          <h3><?= $number_of_users; ?></h3>
-         <p>Usuarios normales</p>
+         <p>Usuarios registrados</p>
          <a href="users_accounts.php" class="btn">Ver usuarios</a>
-      </div>
-
-      <div class="box">
-         <?php
-         $select_admins = $conn->prepare("SELECT * FROM `admins`");
-         $select_admins->execute();
-         $number_of_admins = $select_admins->rowCount();
-         ?>
-         <h3><?= $number_of_admins; ?></h3>
-         <p>Usuarios administradores</p>
-         <a href="admin_accounts.php" class="btn">Ver administradores</a>
       </div>
 
       <div class="box">
@@ -150,34 +214,11 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
          $number_of_messages = $select_messages->rowCount();
          ?>
          <h3><?= $number_of_messages; ?></h3>
-         <p>Nuevos mensajes</p>
-         <a href="messages.php" class="btn">Ver Mensajes</a>
+         <p>Mensajes nuevos</p>
+         <a href="messages.php" class="btn">Ver mensajes</a>
       </div>
    </div>
 </section>
 
-<section class="donaciones" style="margin: 30px;">
-   <h1 style="text-align: center;">Panel de Donaciones</h1>
-
-   <?php
-$query = $conn->prepare("SELECT nombre, producto AS tipo_donacion, fecha FROM donaciones ORDER BY fecha DESC");
-$query->execute();
-$donaciones = $query->fetchAll(PDO::FETCH_ASSOC);
-
-if (count($donaciones) > 0) {
-   foreach ($donaciones as $row) {
-      echo "<div class='donacion' style='background:#fff; border-left:5px solid #4CAF50; padding:15px; margin:15px auto; box-shadow:0 2px 4px rgba(0,0,0,0.1); width:80%; border-radius:8px;'>";
-      echo "<h3 style='margin:0; color:#4CAF50;'>Donación de " . htmlspecialchars($row['nombre']) . "</h3>";
-      echo "<p style='margin:5px 0; color:#555;'>Tipo: " . htmlspecialchars($row['tipo_donacion']) . "</p>";
-      echo "<p style='margin:5px 0; color:#555;'>Fecha: " . htmlspecialchars($row['fecha']) . "</p>";
-      echo "</div>";
-   }
-} else {
-   echo "<p style='text-align:center;'>No hay donaciones registradas.</p>";
-}
-?>
-
-
-<script src="../js/admin_script.js"></script>
 </body>
 </html>

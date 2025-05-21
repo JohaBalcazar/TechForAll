@@ -41,7 +41,7 @@ if(isset($_POST['add_product'])){
    $select_products->execute([$name]);
 
    if($select_products->rowCount() > 0){
-      $message[] = 'product name already exist!';
+      $message[] = '¡El nombre del producto ya existe!';
    }else{
 
       $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03) VALUES(?,?,?,?,?,?)");
@@ -49,12 +49,12 @@ if(isset($_POST['add_product'])){
 
       if($insert_products){
          if($image_size_01 > 2000000 OR $image_size_02 > 2000000 OR $image_size_03 > 2000000){
-            $message[] = 'image size is too large!';
+            $message[] = 'El tamaño de la imagen es demasiado grande!';
          }else{
             move_uploaded_file($image_tmp_name_01, $image_folder_01);
             move_uploaded_file($image_tmp_name_02, $image_folder_02);
             move_uploaded_file($image_tmp_name_03, $image_folder_03);
-            $message[] = 'new product added!';
+            $message[] = 'Nuevo producto Agregado!';
          }
 
       }
@@ -95,6 +95,7 @@ if(isset($_GET['delete'])){
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <link rel="stylesheet" href="../css/admin_style.css">
+   <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -153,7 +154,7 @@ if(isset($_GET['delete'])){
    <div class="box">
       <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
       <div class="name"><?= $fetch_products['name']; ?></div>
-      <div class="price">GS.<span><?= $fetch_products['price']; ?></span>/-</div>
+      <div class="price">GS.<span><?= $fetch_products['price']; ?></span></div>
       <div class="details"><span><?= $fetch_products['details']; ?></span></div>
       <div class="flex-btn">
          <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">Actualizar</a>

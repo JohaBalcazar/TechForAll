@@ -37,9 +37,9 @@ if(isset($_POST['order'])){
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
       $delete_cart->execute([$user_id]);
 
-      $message[] = 'order placed successfully!';
+      $message[] = '¡Pedido realizado con éxito!';
    }else{
-      $message[] = 'your cart is empty';
+      $message[] = 'Tu carrito está vacío';
    }
 
 }
@@ -83,35 +83,35 @@ if(isset($_POST['order'])){
                $total_products = implode($cart_items);
                $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
       ?>
-         <p> <?= $fetch_cart['name']; ?> <span>(<?= '$'.$fetch_cart['price'].'/- x '. $fetch_cart['quantity']; ?>)</span> </p>
+         <p> <?= $fetch_cart['name']; ?> <span>(<?= 'GS'.$fetch_cart['price'].''. $fetch_cart['quantity']; ?>)</span> </p>
       <?php
             }
          }else{
-            echo '<p class="empty">your cart is empty!</p>';
+            echo '<p class="empty">¡Tu carrito está vacío!</p>';
          }
       ?>
          <input type="hidden" name="total_products" value="<?= $total_products; ?>">
          <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
-         <div class="grand-total">Total : <span>GS.<?= $grand_total; ?>/-</span></div>
+         <div class="grand-total">Total : <span>GS.<?= $grand_total; ?></span></div>
       </div>
 
-      <h3>Haz tus pedidos</h3>
+      <h3>Haz tu pedido</h3>
 
       <div class="flex">
          <div class="inputBox">
             <span>Nombre:</span>
-            <input type="text" name="name" placeholder="enter your name" class="box" maxlength="20" required>
+            <input type="text" name="name" placeholder="Ingrese su nombre" class="box" maxlength="20" required>
          </div>
          <div class="inputBox">
             <span>Número:</span>
-            <input type="number" name="number" placeholder="enter your number" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
+            <input type="number" name="number" placeholder="Ingrese su número" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
          </div>
          <div class="inputBox">
             <span>Correo:</span>
-            <input type="email" name="email" placeholder="enter your email" class="box" maxlength="50" required>
+            <input type="email" name="email" placeholder="Ingrese su correo" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
-            <span>Método de Pago :</span>
+            <span>Métodos de Pago :</span>
             <select name="method" class="box" required>
                <option value="cash on delivery">Contra entrega</option>
                <option value="credit card">Tarjeta de crédito</option>
@@ -121,31 +121,31 @@ if(isset($_POST['order'])){
          </div>
          <div class="inputBox">
             <span>Dirección 01:</span>
-            <input type="text" name="flat" placeholder="e.g. Flat number" class="box" maxlength="50" required>
+            <input type="text" name="flat" placeholder="Dirección nombre de la calle" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>Dirección 02:</span>
-            <input type="text" name="street" placeholder="Street name" class="box" maxlength="50" required>
+            <input type="text" name="street" placeholder="Calle o número de casa/departamento" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>Ciudad:</span>
-            <input type="text" name="city" placeholder="Kathmandu" class="box" maxlength="50" required>
+            <input type="text" name="city" placeholder="Asunción" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>Barrio:</span>
-            <input type="text" name="state" placeholder="Bagmati" class="box" maxlength="50" required>
+            <input type="text" name="state" placeholder="Recoleta" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>País :</span>
-            <input type="text" name="country" placeholder="Nepal" class="box" maxlength="50" required>
+            <input type="text" name="country" placeholder="Paraguay" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>Código Postal :</span>
-            <input type="number" min="0" name="pin_code" placeholder="e.g. 56400" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+            <input type="number" min="0" name="pin_code" placeholder="ej. 001001" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
          </div>
       </div>
 
-      <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="place order">
+      <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="Realizar pedido">
 
    </form>
 

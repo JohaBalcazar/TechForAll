@@ -50,7 +50,9 @@ if (isset($_POST['add_product'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar producto</title>
     <link rel="stylesheet" href="../css/admin_style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/vendedor_style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -59,36 +61,37 @@ if (isset($_POST['add_product'])) {
 <section class="add-products">
     <h1 class="heading">Agregar Productos</h1>
 
-    <form action="" method="post" enctype="multipart/form-data">
-        <div class="flex">
-            <div class="inputBox">
-                <span>Nombre del producto</span>
-                <input type="text" class="box" required maxlength="100" name="name">
-            </div>
-            <div class="inputBox">
-                <span>Precio</span>
-                <input type="number" min="0" class="box" required max="9999999999" name="price">
-            </div>
-            <div class="inputBox">
-                <span>Imagen 01</span>
-                <input type="file" name="image_01" accept="image/*" class="box" required>
-            </div>
-            <div class="inputBox">
-                <span>Imagen 02</span>
-                <input type="file" name="image_02" accept="image/*" class="box" required>
-            </div>
-            <div class="inputBox">
-                <span>Imagen 03</span>
-                <input type="file" name="image_03" accept="image/*" class="box" required>
-            </div>
-            <div class="inputBox">
-                <span>Descripción</span>
-                <textarea name="details" class="box" required maxlength="500" cols="30" rows="10"></textarea>
-            </div>
+   <form action="" method="post" enctype="multipart/form-data">
+    <div class="flex">
+        <div class="inputBox">
+            <span>Nombre del producto</span>
+            <input type="text" class="box" required maxlength="100" name="name" placeholder="Ejemplo: Mouse inalámbrico">
         </div>
+        <div class="inputBox">
+            <span>Precio</span>
+            <input type="number" min="0" class="box" required max="9999999999" name="price" placeholder="Ejemplo: 2.000.000">
+        </div>
+        <div class="inputBox">
+            <span>Imagen 01</span>
+            <input type="file" name="image_01" accept="image/*" class="box" required>
+        </div>
+        <div class="inputBox">
+            <span>Imagen 02</span>
+            <input type="file" name="image_02" accept="image/*" class="box" required>
+        </div>
+        <div class="inputBox">
+            <span>Imagen 03</span>
+            <input type="file" name="image_03" accept="image/*" class="box" required>
+        </div>
+        <div class="inputBox">
+            <span>Descripción</span>
+            <textarea name="details" class="box" required maxlength="500" cols="30" rows="10" placeholder="Describe las características y detalles del producto"></textarea>
+        </div>
+    </div>
 
-        <input type="submit" value="Agregar Producto" class="btn" name="add_product">
-    </form>
+    <input type="submit" value="Agregar Producto" class="btn" name="add_product">
+</form>
+
 </section>
 
 <script src="../js/admin_script.js"></script>
