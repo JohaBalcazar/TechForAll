@@ -41,7 +41,7 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
       .heading {
          text-align: center;
          font-size: 2.5rem;
-         color: #a26bff;
+         color:rgb(112, 46, 225);
          margin-bottom: 3rem;
       }
 
@@ -79,7 +79,7 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
       }
 
       .btn {
-         background: #a26bff;
+         background:rgb(123, 60, 233);
          color: white;
          padding: 0.7rem 1.5rem;
          border-radius: 5px;
@@ -129,7 +129,7 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 <?php include '../components/admin_header.php'; ?>
 
 <section class="dashboard">
-   <h1 class="heading">📊 Panel de Control</h1>
+   <h1 class="heading">Dashboard</h1>
 
    <div class="box-container">
       <div class="box">
@@ -154,7 +154,7 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 
       <div class="box">
          <?php
-         $select_post = $conn->prepare("SELECT COUNT(*) FROM `postulaciones`");
+         $select_post = $conn->prepare("SELECT COUNT(*) FROM `postulaciones_donacion`");
          $select_post->execute();
          $total_postulaciones = $select_post->fetchColumn();
          ?>

@@ -10,10 +10,6 @@ if (!isset($_SESSION['vendedor_id'])) {
 
 $vendedor_id = $_SESSION['vendedor_id'];
 
-// Evita que el script quede colgado
-ini_set('max_execution_time', 30);
-
-// Obtener productos
 $productos = [];
 try {
     $query = $conn->prepare("SELECT * FROM products WHERE vendedor_id = ?");
@@ -152,11 +148,11 @@ try {
             <tbody>
                 <?php foreach ($productos as $producto): ?>
                     <tr>
-                        <td><?= htmlspecialchars($producto['nombre']); ?></td>
-                        <td><?= number_format($producto['precio'], 0, ',', '.'); ?> Gs</td>
+                        <td><?= htmlspecialchars($producto['name']); ?></td>
+                        <td><?= number_format($producto['price'], 0, ',', '.'); ?> Gs</td>
                         <td>
                             <a href="editar_productos.php?id=<?= $producto['id']; ?>"><i class="fas fa-edit"></i> Editar</a>
-                            <a href="eliminar_producto.php?id=<?= $producto['id']; ?>" onclick="return confirm('¿Estás seguro de eliminar este producto?');"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                            <a href="eliminar_productos.php?id=<?= $producto['id']; ?>" onclick="return confirm('¿Estás seguro de eliminar este producto?');"><i class="fas fa-trash-alt"></i> Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

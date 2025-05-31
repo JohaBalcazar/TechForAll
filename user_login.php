@@ -2,43 +2,34 @@
 include 'components/connect.php';
 session_start();
 
-if(isset($_SESSION['user_id'])){
-   // Si ya hay sesión activa, redirigir según el rol
-   if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'vendedor') {
-      header('Location: vendedor_panel.php');
-   } else {
-      header('Location: home.php');
-   }
-   exit;
-}
+if (isset($_POST['submit'])) {
+   $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+   $pass = $_POST['pass'];
 
-if(isset($_POST['submit'])){
+   $select_user = $conn->prepare("SELECT * FROM users WHERE email = ?");
+   $select_user->execute([$email]);
+   $user = $select_user->fetch(PDO::FETCH_ASSOC);
 
-   $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-   $pass = sha1($_POST['pass']); // ¡OJO! sha1 no es lo más seguro, pero usaremos tu base actual
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+   if ($user && password_verify($pass, $user['password'])) {
+      $_SESSION['user_id'] = $user['id'];
+      $_SESSION['rol'] = $user['role'];
 
-   $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ?");
-   $select_user->execute([$email, $pass]);
-
-   if($select_user->rowCount() > 0){
-      $row = $select_user->fetch(PDO::FETCH_ASSOC);
-      $_SESSION['user_id'] = $row['id'];
-      $_SESSION['rol'] = $row['rol']; // ← guardamos el rol del usuario
-
-      // Redireccionar según el rol
-      if ($row['rol'] === 'vendedor') {
-         header('Location: vendedor_panel.php');
+      if ($user['role'] === 'vendedor') {
+         header('Location: /projectdone/vendedor/home.php');
+      } elseif ($user['role'] === 'admin') {
+         header('Location: /projectdone/admin/dashboard.php');
       } else {
-         header('Location: home.php');
+         header('Location: /projectdone/home.php');
       }
       exit;
-   }else{
-      $message[] = '¡Correo o contraseña incorrectos!';
+   } else {
+      $message[] = 'Correo o contraseña incorrectos.';
    }
 }
-?>
+?> 
+
+
+
 
 <!DOCTYPE html>
 <html lang="es">

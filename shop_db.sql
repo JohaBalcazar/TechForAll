@@ -296,3 +296,9 @@ CREATE TABLE donaciones (
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   estado ENUM('pendiente', 'aceptado', 'rechazado') DEFAULT 'pendiente'
 );
+
+ALTER TABLE `users`
+MODIFY `role` ENUM('comprador', 'vendedor', 'admin') NOT NULL DEFAULT 'comprador';
+
+ALTER TABLE users DROP COLUMN rol;
+ALTER TABLE users MODIFY password VARCHAR(255) NOT NULL;

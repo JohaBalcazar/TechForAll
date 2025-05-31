@@ -38,11 +38,11 @@ if(isset($_SESSION['user_id'])){
    <div class="row">
 
       <div class="image">
-         <img src="images/nos.png" alt="">
+         <img src="images/nosotros.png" alt="">
       </div>
 
       <div class="content">
-         <h3>"TechForAll: Tecnología reacondicionada con propósito"</h3>
+         <h3>"Tecnología reacondicionada con propósito"</h3>
          <p>Conectamos personas, reducimos el desperdicio electrónico y promovemos el acceso a dispositivos de calidad a precios justos. Comprá, vendé o doná con impacto social.</p>
 
          <p>¿Qué es TechForAll? </p> <p>TechForAll es una plataforma paraguaya de e-commerce dedicada a la compra, venta, reacondicionamiento y donación de productos tecnológicos. </a> Promovemos el acceso equitativo a la tecnología y fomentamos la economía circular mediante procesos responsables y sustentables.</p>

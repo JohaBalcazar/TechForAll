@@ -1,45 +1,31 @@
 <?php
-
 include 'components/connect.php';
-
 session_start();
 
-if(isset($_SESSION['user_id'])){
-   $user_id = $_SESSION['user_id'];
-}else{
-   $user_id = '';
-};
-
-if(isset($_POST['submit'])){
-
-   $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
-   $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
-   $cpass = sha1($_POST['cpass']);
-   $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
+if (isset($_POST['submit'])) {
+   $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+   $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+   $pass = $_POST['pass'];
+   $cpass = $_POST['cpass'];
 
    $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
-   $select_user->execute([$email,]);
-   $row = $select_user->fetch(PDO::FETCH_ASSOC);
+   $select_user->execute([$email]);
 
-   if($select_user->rowCount() > 0){
-      $message[] = '¡El correo electrónico ya existe!';
-   }else{
-      if($pass != $cpass){
-         $message[] = '¡Confirmar contraseña no coincidente!';
-      }else{
-         $insert_user = $conn->prepare("INSERT INTO `users`(name, email, password) VALUES(?,?,?)");
-         $insert_user->execute([$name, $email, $cpass]);
-         $message[] = 'Registrado exitosamente, ¡inicie sesión ahora por favor!';
-      }
+   if ($select_user->rowCount() > 0) {
+      $message[] = '¡El correo electrónico ya está registrado!';
+   } elseif ($pass !== $cpass) {
+      $message[] = '¡Confirmación de contraseña incorrecta!';
+   } else {
+      $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
+      $insert_user = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'comprador')");
+      $insert_user->execute([$name, $email, $hashed_pass]);
+
+      $message[] = '¡Registro exitoso! Inicia sesión.';
    }
-
 }
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +53,7 @@ if(isset($_POST['submit'])){
       <input type="text" name="name" required placeholder="Ingresa tu nombre de usuario" maxlength="20"  class="box">
       <input type="email" name="email" required placeholder="Ingresa tu correo electrónico" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="pass" required placeholder="Ingresa tu contraseña" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="cpass" required placeholder="cConfirma tu contraseña" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="cpass" required placeholder="Confirma tu contraseña" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="Regístrate ahora" class="btn" name="submit">
       <p>¿Ya tienes una cuenta?</p>
       <a href="user_login.php" class="option-btn">Iniciar sesión ahora.</a>

@@ -131,9 +131,9 @@ if(isset($_POST['update'])){
          </div>
       </div>
       <span>Actualizar Nombre</span>
-      <input type="text" name="name" required class="box" maxlength="100" placeholder="ingrese el nombre del producto" value="<?= $fetch_products['name']; ?>">
+      <input type="text" name="name" required class="box" maxlength="100" placeholder="Ingrese el nombre del producto" value="<?= $fetch_products['name']; ?>">
       <span>Actualizar Precio</span>
-      <input type="number" name="price" required class="box" min="0" max="9999999999" placeholder="ingrese el precio del producto" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['price']; ?>">
+      <input type="number" name="price" required class="box" min="0" max="9999999999" placeholder="Ingrese el precio del producto" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['price']; ?>">
       <span>Actualizar Detalles</span>
       <textarea name="details" class="box" required cols="30" rows="10"><?= $fetch_products['details']; ?></textarea>
       <span>Actualizar imagen 01</span>

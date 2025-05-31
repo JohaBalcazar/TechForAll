@@ -44,7 +44,7 @@ $vendedor_id = $_SESSION['vendedor_id'];
 
         .hero-texto h1 {
             font-size: 5rem;
-            color:rgb(191, 71, 255);
+            color:rgb(91, 7, 194);
             margin-bottom: 1rem;
         }
 
@@ -66,7 +66,7 @@ $vendedor_id = $_SESSION['vendedor_id'];
         }
 
         .btn-hero.primary {
-            background: #a26bff;
+            background:rgb(86, 4, 227);
             color: white;
         }
 
@@ -184,7 +184,7 @@ $vendedor_id = $_SESSION['vendedor_id'];
       </div>
     </div>
     <div class="hero-imagen">
-      <img src="../images/vend.png" alt="TechForAll Ilustración">
+      <img src="../images/VENDEDORP.png" alt="TechForAll Ilustración">
     </div>
   </div>
 </section>

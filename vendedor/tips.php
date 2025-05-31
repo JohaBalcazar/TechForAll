@@ -155,12 +155,12 @@ if (!isset($_SESSION['vendedor_id']) || $_SESSION['rol'] !== 'vendedor') {
 
     <section class="tips-horizontal">
         <div class="tip-card">
-            <img src="../images/t5.png" alt="Atención rápida">
-            <h3>Responde rápido</h3>
-            <p>Una buena atención y respuesta rápida puede asegurar la venta frente a otros vendedores.</p>
+            <img src="../images/tips2.png" alt="Atención rápida">
+            <h3>Sé Realista</h3>
+            <p>Ofrece productos de calidad sin mentir a las personas sobre ello.</p>
         </div>
         <div class="tip-card">
-            <img src="../images/t4.png" alt="Opiniones positivas">
+            <img src="../images/tips1.png" alt="Opiniones positivas">
             <h3>Reputación</h3>
             <p>Cumplí con los tiempos de entrega y calidad para recibir valoraciones positivas.</p>
         </div>

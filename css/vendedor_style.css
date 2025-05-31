@@ -173,3 +173,15 @@ button:hover {
     text-align: left;
   }
 }
+
+input.box,
+textarea.box {
+    color: #000 !important; 
+    background-color: #fff !important; 
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #aaa;
+}
+

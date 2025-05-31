@@ -16,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($nombre && $email && $numero && $producto && $motivo) {
         try {
             // Insertamos en la tabla postulaciones_donacion
-            $stmt = $conn->prepare("INSERT INTO postulaciones_donacion (user_id, nombre, email, numero, producto, motivo, mensaje) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$user_id, $nombre, $email, $numero, $producto, $motivo, $mensaje]);
+           $stmt = $conn->prepare("INSERT INTO postulaciones (nombre, email, numero, producto, motivo, mensaje) VALUES (?, ?, ?, ?, ?, ?)");
+
+            $stmt->execute([$nombre, $email, $numero, $producto, $motivo, $mensaje]);
 
             echo "<script>alert('¡Gracias por postular tu comunidad!'); window.location.href='donar.php';</script>";
         } catch (PDOException $e) {

@@ -8,43 +8,40 @@ if (isset($_POST['correo']) && isset($_POST['password'])) {
     $correo = $_POST['correo'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE email = :correo";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':correo', $correo);
-    $stmt->execute();
-    $usuario = $stmt->fetch(PDO::FETCH_OBJ);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$correo]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($usuario && $usuario->role === 'vendedor' && password_verify($password, $usuario->password)) {
-        $_SESSION['vendedor_id'] = $usuario->id;
-        $_SESSION['rol'] = $usuario->role;
-        $_SESSION['nombre'] = $usuario->name;
+    if ($user && $user['role'] === 'vendedor' && password_verify($password, $user['password'])) {
+        $_SESSION['vendedor_id'] = $user['id'];
+        $_SESSION['rol'] = $user['role'];
+        $_SESSION['nombre'] = $user['name'];
 
-        header('Location: home.php');
+        header('Location: /projectdone/vendedor/home.php');
         exit;
     } else {
-        $message[] = "Correo o contraseña incorrectos, o no eres vendedor.";
+        $message[] = 'Correo o contraseña incorrectos o no eres vendedor.';
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
    <meta charset="UTF-8">
    <title>Login Vendedor</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-   <link rel="stylesheet" href="../css/admin_style.css">
+   <link rel="stylesheet" href="../css/vendedor_style.css">
+   <link rel="stylesheet" href="../css/style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <?php
 if (!empty($message)) {
    foreach ($message as $msg) {
-      echo '
-      <div class="message">
-         <span>' . $msg . '</span>
-         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-      </div>';
+      echo '<div class="message"><span>' . $msg . '</span><i class="fas fa-times" onclick="this.parentElement.remove();"></i></div>';
    }
 }
 ?>

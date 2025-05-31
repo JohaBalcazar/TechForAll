@@ -2,10 +2,6 @@
 include '../components/connect.php';
 session_start();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 $vendedor_id = $_SESSION['vendedor_id'] ?? '';
 
 if (!$vendedor_id) {
@@ -13,44 +9,29 @@ if (!$vendedor_id) {
    exit;
 }
 
-// Obtener perfil del vendedor
 $fetch_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
 $fetch_profile->execute([$vendedor_id]);
+$profile = $fetch_profile->fetch(PDO::FETCH_ASSOC);
 
-if ($fetch_profile->rowCount() > 0) {
-   $profile = $fetch_profile->fetch(PDO::FETCH_ASSOC);
-} else {
-   die('<h2 style="color:red;text-align:center;margin-top:2rem;">¡Perfil no encontrado!</h2>');
-}
-
-// Procesar formulario
 if (isset($_POST['submit'])) {
    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-
-   // Actualizar nombre
    $update_name = $conn->prepare("UPDATE `users` SET name = ? WHERE id = ?");
    $update_name->execute([$name, $vendedor_id]);
 
-   // Contraseña
-   $empty_pass = sha1('');
-   $prev_pass = $_POST['prev_pass'];
-   $old_pass = sha1($_POST['old_pass']);
-   $new_pass = sha1($_POST['new_pass']);
-   $confirm_pass = sha1($_POST['confirm_pass']);
+   $old_pass = $_POST['old_pass'];
+   $new_pass = $_POST['new_pass'];
+   $confirm_pass = $_POST['confirm_pass'];
 
-   if ($old_pass == $empty_pass) {
-      $mensaje = '⚠️ Por favor, ingresa tu contraseña actual.';
-   } elseif ($old_pass != $prev_pass) {
-      $mensaje = '❌ La contraseña actual es incorrecta.';
-   } elseif ($new_pass != $confirm_pass) {
-      $mensaje = '❌ La nueva contraseña no coincide.';
-   } else {
-      if ($new_pass != $empty_pass) {
-         $update_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
-         $update_pass->execute([$confirm_pass, $vendedor_id]);
-         $mensaje = '✅ Contraseña actualizada correctamente.';
+   if (!empty($old_pass) || !empty($new_pass) || !empty($confirm_pass)) {
+      if (!password_verify($old_pass, $profile['password'])) {
+         $mensaje = 'La contraseña actual no coincide.';
+      } elseif ($new_pass !== $confirm_pass) {
+         $mensaje = 'Las nuevas contraseñas no coinciden.';
       } else {
-         $mensaje = '⚠️ La nueva contraseña no puede estar vacía.';
+         $new_hashed = password_hash($new_pass, PASSWORD_DEFAULT);
+         $update_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
+         $update_pass->execute([$new_hashed, $vendedor_id]);
+         $mensaje = 'Contraseña actualizada correctamente.';
       }
    }
 }

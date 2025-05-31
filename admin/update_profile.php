@@ -70,10 +70,10 @@ if(isset($_POST['submit'])){
    <form action="" method="post">
       <h3>Actualizar perfil</h3>
       <input type="hidden" name="prev_pass" value="<?= $fetch_profile['password']; ?>">
-      <input type="text" name="name" value="<?= $fetch_profile['name']; ?>" required placeholder="ingresa tu nombre de usuario" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="old_pass" placeholder="ingrese la contraseña anterior" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="new_pass" placeholder="ingrese la contraseña nueva" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="confirm_pass" placeholder="confirmar nueva contraseña" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="text" name="name" value="<?= $fetch_profile['name']; ?>" required placeholder="Ingresa tu nombre de usuario" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="old_pass" placeholder="Ingrese la contraseña anterior" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="new_pass" placeholder="Ingrese la contraseña nueva" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="confirm_pass" placeholder="Confirmar nueva contraseña" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="Actualizar" class="btn" name="submit">
    </form>
 

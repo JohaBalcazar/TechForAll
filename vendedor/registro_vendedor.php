@@ -1,26 +1,44 @@
 <?php
-include 'components/connect.php';
+include '../components/connect.php';
 session_start();
 
+$message = [];
+
 if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $rol = 'vendedor';
+    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $pass = $_POST['pass'];
+    $cpass = $_POST['cpass'];
 
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$name, $email, $password, $rol]);
+    $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $check->execute([$email]);
 
-    $_SESSION['vendedor_id'] = $conn->lastInsertId();
-    $_SESSION['rol'] = 'vendedor';
-    $_SESSION['nombre'] = $name;
+    if ($check->rowCount() > 0) {
+        $message[] = '¡Este correo ya está registrado!';
+    } elseif ($pass !== $cpass) {
+        $message[] = '¡Las contraseñas no coinciden!';
+    } else {
+        $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'vendedor')");
+        $stmt->execute([$name, $email, $hashed_pass]);
 
-    header('Location: vendedor/vendedor_panel.php');
-    exit;
+        $_SESSION['vendedor_id'] = $conn->lastInsertId();
+        $_SESSION['rol'] = 'vendedor';
+        $_SESSION['nombre'] = $name;
+
+        header('Location: vendedor_panel.php');
+        exit;
+    }
 }
 ?>
 
 <!-- Formulario HTML -->
+<?php if (!empty($message)) {
+    foreach ($message as $msg) {
+        echo '<div class="message"><span>' . htmlspecialchars($msg) . '</span></div>';
+    }
+} ?>
+
 <form method="POST" action="">
     <input type="text" name="name" placeholder="Nombre" required>
     <input type="email" name="email" placeholder="Correo" required>

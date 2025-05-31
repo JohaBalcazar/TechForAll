@@ -18,11 +18,8 @@ if (isset($_GET['exito']) && $_GET['exito'] == 1) {
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Doná Tecnología - TechForAll</title>
 
-   <!-- Swiper y FontAwesome -->
    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- Estilos -->
    <link rel="stylesheet" href="css/style.css">
    <link rel="stylesheet" href="css/donar.css">
    <style>
@@ -39,15 +36,15 @@ if (isset($_GET['exito']) && $_GET['exito'] == 1) {
 <section class="about">
    <div class="row">
       <div class="image">
-         <img src="images/don.png" alt="Donar Tecnología">
+         <img src="images/donar.png" alt="Donar Tecnología">
       </div>
       <div class="content">
          <h3>Un pequeño gesto, un gran impacto</h3>
          <p>En <strong>TechForAll</strong>, transformamos tus dispositivos en oportunidades. Cada computadora o dispositivo tecnológico que ya no usás puede marcar la diferencia en una escuela, un colegio o un centro comunitario. 🌍💻</p>
          <ul>
-            <li>Reacondicionamos con amor y dedicación.</li>
-            <li>Apoyamos a instituciones educativas y sociales.</li>
-            <li>Ayudamos al planeta evitando residuos electrónicos.</li>
+            <li>● Reacondicionamos con amor y dedicación.</li>
+            <li>● Apoyamos a instituciones educativas y sociales.</li>
+            <li>● Ayudamos al planeta evitando residuos electrónicos.</li>
          </ul>
          <a href="#form-donacion" class="boton">Donar tecnología</a>
          <button id="btn-postulacion" class="boton secundario">Registrar mi comunidad</button>
@@ -55,7 +52,7 @@ if (isset($_GET['exito']) && $_GET['exito'] == 1) {
    </div>
 </section>
 <?php if (!empty($mensaje_exito)): ?>
-   <div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin: 20px auto; width: 90%; max-width: 700px; text-align: center; border: 1px solid #c3e6cb;">
+   <div style="background-color: #d4edda; color:rgb(67, 178, 93); padding: 15px; border-radius: 5px; margin: 20px auto; width: 90%; max-width: 700px; text-align: center; border: 1px solid #c3e6cb;">
       <?= $mensaje_exito ?>
    </div>
 <?php endif; ?>

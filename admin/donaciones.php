@@ -63,7 +63,7 @@ $donaciones = $conn->query("SELECT * FROM donaciones ORDER BY fecha DESC")->fetc
          text-align: center;
       }
       .donacion {
-         background: #202040;
+         background:rgb(247, 247, 255);
          margin-bottom: 1.5rem;
          padding: 1.5rem;
          border-radius: 0.7rem;
@@ -71,11 +71,11 @@ $donaciones = $conn->query("SELECT * FROM donaciones ORDER BY fecha DESC")->fetc
       }
       .donacion h3 {
          margin: 0 0 0.5rem;
-         color: #ffb347;
+         color:rgb(109, 53, 251);
       }
       .donacion p {
          margin: 0.3rem 0;
-         color: #ccc;
+         color: grey;
       }
       .imagen-previa {
          margin-top: 0.5rem;

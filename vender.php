@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
    <link rel="stylesheet" href="css/style.css">
    <style>
       :root {
-         --main-color: #a26bff;
+         --main-color:rgb(109, 91, 249);
          --accent-color: #4a3aff;
          --bg-color: #0b0b13;
          --dark-blue: #1a1a2e;
@@ -249,9 +249,84 @@ if (isset($_POST['submit'])) {
       <input type="password" name="cpass" required placeholder="Confirmar contraseña" maxlength="20" class="box">
       <input type="submit" value="Registrarme ahora" class="btn" name="submit">
       <p>¿Ya tienes una cuenta?</p>
-      <a href="login_vendedor.php" class="btn">Iniciar sesión</a>
+      <a href="user_login.php" class="btn">Iniciar sesión</a>
    </form>
+</section> 
+<section class="terminos-vendedor">
+   <div class="contenedor-terminos">
+      <h2 class="titulo-terminos"><i class="fas fa-file-contract"></i> Términos y Condiciones del Vendedor</h2>
+
+      <div class="bloque-termino">
+         <p><strong>Privacidad:</strong> La información que proporciones (nombre, correo, etc.) será <span class="resaltado">mantenida en confidencialidad</span>. Sin embargo, tu <strong>nombre aparecerá públicamente</strong> junto a tus productos (Ej: Producto de vendedor: <em>Juan</em>).</p>
+      </div>
+
+      <div class="bloque-termino">
+         <p><strong>Prueba gratuita:</strong> Todos los vendedores nuevos acceden a <span class="resaltado">3 semanas de uso gratuito</span> para publicar productos, gestionar pedidos y medir resultados.</p>
+      </div>
+
+      <div class="bloque-termino">
+         <p><strong>Plan premium:</strong> Al finalizar la prueba, podrás elegir <strong>activar el plan premium</strong> por <span class="resaltado">₲70.000/mes</span> o dejar tu cuenta retenida hasta tomar una decisión.</p>
+      </div>
+
+      <div class="bloque-termino">
+         <p><strong>Comisión por ventas:</strong> Se aplicará una <span class="resaltado">comisión del 5%</span> sobre cada venta que realices como vendedor.</p>
+      </div>
+
+      <div class="bloque-termino">
+         <p><strong>Transparencia y confianza:</strong> TechForAll prioriza la <span class="resaltado">experiencia segura y responsable</span> de todos los usuarios.</p>
+      </div>
+   </div>
 </section>
+
+<style>
+.terminos-vendedor {
+   padding: 4rem 2rem;
+   margin: 4rem auto 0;
+   max-width: 900px;
+   background: rgba(255, 255, 255, 0.03);
+   border: 1px solid rgba(255, 255, 255, 0.08);
+   border-radius: 1rem;
+   box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+   color: #fff;
+   font-family: 'Poppins', sans-serif;
+}
+
+.titulo-terminos {
+   text-align: center;
+   font-size: 2.6rem;
+   margin-bottom: 2.5rem;
+   color: #a26bff;
+}
+
+.bloque-termino {
+   background: rgba(255,255,255,0.05);
+   border-left: 4px solid #a26bff;
+   padding: 1.6rem;
+   margin-bottom: 1.8rem;
+   border-radius: 0.6rem;
+}
+
+.bloque-termino p {
+   font-size: 1.5rem;
+   line-height: 1.8;
+   margin: 0;
+   color: #ddd;
+}
+
+.bloque-termino strong {
+   color: #ffb347;
+}
+
+.resaltado {
+   color: #ffffff;
+   background: rgba(162, 107, 255, 0.2);
+   padding: 0.2rem 0.5rem;
+   border-radius: 0.4rem;
+   font-weight: 600;
+}
+</style>
+
+
 
 <?php include 'components/footer.php'; ?>
 <script src="js/script.js"></script>

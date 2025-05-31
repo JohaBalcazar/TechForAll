@@ -218,13 +218,40 @@ if (!isset($_SESSION['vendedor_id']) || $_SESSION['rol'] !== 'vendedor') {
     <div class="contenido-banner">
         <div class="texto-banner">
             <h1>¿Cómo vender en TechForAll?</h1>
-            <p>En TechForAll, te damos las herramientas necesarias para convertirte en un vendedor responsable y exitoso. ¿Tenés dispositivos que ya no usás? ¿Querés darles una segunda vida y ganar dinero con propósito? Esta es tu oportunidad.Formá parte de una comunidad que apuesta por el consumo consciente, la tecnología accesible y la reducción de residuos electrónicos. Desde tu panel de vendedor podés publicar productos en minutos: subí imágenes, escribí una buena descripción, definí tu precio... ¡y listo! Miles de personas estarán viendo tus productos.Cada venta no solo genera ingresos, también genera impacto. Sumate a la transformación digital responsable y vendé con nosotros en TechForAll.</p>
+
+            <p>
+                En <strong>TechForAll</strong>, te damos las <strong>herramientas necesarias</strong> para convertirte en un 
+                <strong>vendedor responsable y exitoso</strong>.
+            </p>
+
+            <p>
+                ¿Tenés <strong>dispositivos que ya no usás</strong>? ¿Querés <strong>darles una segunda vida</strong> y 
+                <strong>ganar dinero con propósito</strong>? Esta es tu oportunidad.
+            </p>
+
+            <p>
+                Formá parte de una comunidad que apuesta por el <strong>consumo consciente</strong>, la 
+                <strong>tecnología accesible</strong> y la <strong>reducción de residuos electrónicos</strong>.
+            </p>
+
+            <p>
+                Desde tu <strong>panel de vendedor</strong> podés <strong>publicar productos en minutos</strong>: subí imágenes, 
+                escribí una buena descripción, definí tu precio... <strong>¡y listo!</strong> Miles de personas estarán viendo tus productos.
+            </p>
+
+            <p>
+                Cada venta no solo <strong>genera ingresos</strong>, también <strong>genera impacto</strong>. 
+                Sumate a la <strong>transformación digital responsable</strong> y vendé con nosotros en 
+                <strong>TechForAll</strong>.
+            </p>
         </div>
+
         <div class="imagen-banner">
-            <img src="../images/ven.png" alt="Guía para vender en TechForAll">
+            <img src="../images/comov.png" alt="Guía para vender en TechForAll">
         </div>
     </div>
 </section>
+
 
 <section class="pasos">
     <div class="paso">
@@ -249,27 +276,42 @@ if (!isset($_SESSION['vendedor_id']) || $_SESSION['rol'] !== 'vendedor') {
     <p>Ingresá al panel y publicá tu primer producto reacondicionado con impacto social.</p>
     <a href="vendedor_panel.php" class="btn-panel">Ir al Panel</a>
 </section>
-
 <section class="info-vender">
     <div class="contenedor-info">
         <div class="bloque-info">
             <h3><i class="fas fa-laptop-code"></i> Dispositivos que Podés Vender</h3>
-            <p>Permitimos la venta de laptops, PCs, Teclados, Mouse, Monitores y otros dispositivos tecnológicos. Todos deben estar funcionando o reacondicionados.</p>
+            <p>
+                Permitimos la venta de <strong>laptops</strong>, <strong>PCs</strong>, <strong>teclados</strong>, <strong>mouse</strong>, <strong>monitores</strong> y otros 
+                <strong>dispositivos tecnológicos</strong>. Todos deben estar <strong>funcionando</strong> o <strong>reacondicionados</strong>.
+            </p>
         </div>
+
         <div class="bloque-info">
             <h3><i class="fas fa-check-circle"></i> Estados Aceptados</h3>
-            <p>Aceptamos productos nuevos, reacondicionados, con detalles estéticos leves o usados pero funcionales. Cada estado debe especificarse con claridad en la publicación.</p>
+            <p>
+                Aceptamos productos <strong>nuevos</strong>, <strong>reacondicionados</strong>, con <strong>detalles estéticos leves</strong> o 
+                <strong>usados pero funcionales</strong>. Cada estado debe especificarse con <strong>claridad</strong> en la publicación.
+            </p>
         </div>
+
         <div class="bloque-info">
             <h3><i class="fas fa-credit-card"></i> Métodos de Pago</h3>
-            <p>Recibimos pagos mediante tarjeta de crédito, débito, pago contra entrega, transferencias bancarias y billeteras digitales. Todo a través de plataformas seguras.</p>
+            <p>
+                Recibimos pagos mediante <strong>tarjeta de crédito</strong>, <strong>débito</strong>, <strong>pago contra entrega</strong>, 
+                <strong>transferencias bancarias</strong> y <strong>billeteras digitales</strong>. Todo a través de <strong>plataformas seguras</strong>.
+            </p>
         </div>
+
         <div class="bloque-info">
             <h3><i class="fas fa-shipping-fast"></i> Procesamiento y Compras</h3>
-            <p>Una vez realizada la compra, recibirás una notificación para organizar el envío o la entrega. Nosotros acompañamos el proceso para garantizar la seguridad.</p>
+            <p>
+                Una vez realizada la compra, recibirás una <strong>notificación</strong> para organizar el <strong>envío</strong> o la 
+                <strong>entrega</strong>. Nosotros acompañamos el proceso para garantizar la <strong>seguridad</strong>.
+            </p>
         </div>
     </div>
 </section>
+
 
 
 <?php include '../components/footer.php'; ?>

@@ -3,6 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+
 include 'components/connect.php';
 
 $user_id = $_SESSION['user_id'] ?? '';
@@ -24,10 +25,12 @@ include 'components/wishlist_cart.php';
 <body>
 
 <?php include 'components/user_header.php'; ?>
+
+<!-- HERO PRINCIPAL -->
 <section class="hero-techforall">
   <div class="hero-container">
     <div class="hero-texto">
-      <h1><span class="highlight">TechForAll</span>: TECNOLOGÍA AL ALCANCE DE TODOS</h1>
+      <h1><span class="highlight">TechForAll: </span>Conectando personas con TECNOLOGÍA </h1>
       <p>Comprá, vendé o doná dispositivos tecnológicos reacondicionados y sé parte de una comunidad comprometida con la sustentabilidad y la inclusión digital. Juntos transformamos vidas, ofreciendo acceso responsable a la tecnología para quienes más lo necesitan, generando un impacto social positivo y reduciendo el desperdicio electrónico</p>
       <div class="hero-botones">
         <a href="shop.php" class="btn-hero primary">Comprar</a>
@@ -35,44 +38,12 @@ include 'components/wishlist_cart.php';
       </div>
     </div>
     <div class="hero-imagen">
-      <img src="images/pat.png" alt="TechForAll Ilustración">
+      <img src="images/hmm1.png" alt="TechForAll Ilustración">
     </div>
   </div>
 </section>
 
-
-         </div>
-         <div class="swiper-pagination"></div>
-      </div>
-   </section>
-</div>
-<section class="categoria-modern">
-  <h2 class="section-title">Comprar por categoría</h2>
-  <div class="categoria-grid">
-    <div class="card">
-      <img src="images/icon-1.png" alt="Notebook" />
-      <h3>Notebook</h3>
-    </div>
-    <div class="card">
-      <img src="images/icon-2.png" alt="Monitores" />
-      <h3>Monitores</h3>
-    </div>
-    <div class="card">
-      <img src="images/icon-3.png" alt="Teclados" />
-      <h3>Teclados</h3>
-    </div>
-    <div class="card">
-      <img src="images/icon-4.png" alt="Mouse" />
-      <h3>Mouse</h3>
-    </div>
-    <div class="card">
-      <img src="images/icon-5.png" alt="PC" />
-      <h3>PC</h3>
-    </div>
-  </div>
-</section>
-
-
+<!-- CARRUSEL DE PRODUCTOS -->
 <section class="home-products">
    <h1 class="heading">Últimos productos</h1>
    <div class="swiper products-slider">
@@ -110,6 +81,75 @@ include 'components/wishlist_cart.php';
       <div class="swiper-pagination"></div>
    </div>
 </section>
+
+<!-- CATEGORÍAS -->
+<section class="categoria-modern">
+  <h2 class="section-title">Categorías de productos</h2>
+  <div class="categoria-grid">
+    <div class="card">
+      <img src="images/icon-1.png" alt="Notebook" />
+      <h3>Notebook</h3>
+    </div>
+    <div class="card">
+      <img src="images/icon-2.png" alt="Monitores" />
+      <h3>Monitores</h3>
+    </div>
+    <div class="card">
+      <img src="images/icon-3.png" alt="Teclados" />
+      <h3>Teclados</h3>
+    </div>
+    <div class="card">
+      <img src="images/icon-4.png" alt="Mouse" />
+      <h3>Mouse</h3>
+    </div>
+    <div class="card">
+      <img src="images/icon-5.png" alt="PC" />
+      <h3>PC</h3>
+    </div>
+  </div>
+</section>
+<!-- SECCIÓN DE REACONDICIONAMIENTO -->
+<section class="reacondicionamiento-section" style="padding: 4rem 2rem; background: rgba(255, 255, 255, 0.03); text-align: left;">
+  <div style="max-width: 1200px; margin: auto; display: flex; align-items: center; flex-wrap: wrap; gap: 3rem;">
+
+    <div style="flex: 1 1 500px;">
+      <h2 style="font-size: 3.2rem; color: rgb(132, 71, 254); margin-bottom: 1rem;">
+        SOPORTE Y <br> REACONDICIONAMIENTO </br>
+      </h2>
+      <p style="max-width: 800px; font-size: 1.7rem; color: #ffffff;">
+        En <strong>TechForAll</strong> reacondicionamos tecnología para darle una segunda vida. Nuestro equipo técnico se encarga de revisar, reparar y optimizar equipos para que vuelvan a funcionar como nuevos. 
+        <br><br>Ayudanos a reducir el desperdicio electrónico y llevar la tecnología a más personas.
+      </p>
+
+      <div style="margin-top: 2.5rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+        <div style="flex: 1 1 180px; background: rgba(201, 220, 242, 0.8); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 0 10px rgba(0,0,0,0.3); color: rgba(36, 34, 34, 0.79);">
+          <i class="fas fa-tools" style="font-size: 2.2rem; color: rgb(113, 13, 253);"></i>
+          <h3 style="margin-top: 0.8rem; font-size: 1.2rem;">Revisión técnica</h3>
+        </div>
+        <div style="flex: 1 1 180px; background: rgba(201, 220, 242, 0.8); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 0 10px rgba(0,0,0,0.3); color: rgba(36, 34, 34, 0.79)">
+          <i class="fas fa-recycle" style="font-size: 2.2rem; color: rgb(167, 110, 40);"></i>
+          <h3 style="margin-top: 0.8rem; font-size: 1.2rem;">Reacondicionamiento</h3>
+        </div>
+        <div style="flex: 1 1 180px; background: rgba(201, 220, 242, 0.8); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 0 10px rgba(0,0,0,0.3); color: rgba(36, 34, 34, 0.79)">
+          <i class="fas fa-hand-holding-heart" style="font-size: 2.2rem; color: rgb(87, 62, 232);"></i>
+          <h3 style="margin-top: 0.8rem; font-size: 1.2rem;">Impacto social</h3>
+        </div>
+      </div>
+
+      <a href="reacondicionamiento.php" class="btn-hero primary" style="margin-top: 2.5rem; padding: 0.8rem 2rem; font-size: 1.2rem; background-color:rgba(181, 113, 241, 0.82); color: white; border-radius: 0.5rem; display: inline-block;">
+        Ver más 
+      </a>
+    </div>
+
+   
+    <div style="flex: 1 1 400px; text-align: center;">
+      <img src="images/ast.png" alt="Reacondicionamiento TechForAll" style="max-width: 100%; border-radius: 1rem; box-shadow: 0 0 20px rgba(0,0,0,0.4);">
+    </div>
+    
+  </div>
+</section>
+
+
 
 <?php include 'components/footer.php'; ?>
 
@@ -156,3 +196,7 @@ new Swiper(".products-slider", {
 
 </body>
 </html>
+
+
+
+
